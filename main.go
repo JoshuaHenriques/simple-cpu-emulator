@@ -1,28 +1,43 @@
 package main
 
-var (
-	registers = []int{0, 0, 0, 0}
-	pc        = 0
-	halted    = false
-	program   = []int{
-		11, 0, 10, 42, 6, 255, 30, 0, 11, 0, 0, 11, 1, 1, 11, 3, 1, 60, 1, 10, 2, 0, 20,
-		2, 1, 60, 2, 10, 0, 1, 10, 1, 2, 11, 2, 1, 20, 3, 2, 31, 2, 30, 2, 41, 3, 2, 19, 31, 0, 50,
-	}
+import (
+	"fmt"
 )
 
-func runInstr() {
-	if halted {
-		return
-	}
-	instr := program[pc]
-
-	switch instr {
-	//
-	}
-}
-
 func main() {
-	for !halted {
-		runInstr()
-	}
+	fmt.Printf("This program prints Fibonacci numbers")
+	fmt.Printf("by running a machine code program on top of a VM/Virtual CPU\n")
+	code := `// Loads value 10 in R0 
+// and calls Fibonacci routine
+
+MOVV R0, 10
+CALL 6
+HALT
+
+// This is the Fibonacci routing
+// Expects number of Fibonacci 
+// numbers in register R0
+
+PUSH R0
+MOVV R0, 0
+MOVV R1, 1
+MOVV R3, 1
+PRINT R1
+MOVR R2, R0
+ADD R2, R1
+PRINT R2
+MOVR R0, R1
+MOVR R1, R2
+MOVV R2, 1
+ADD R3, R2
+POP R2
+PUSH R2
+JL R3, R2, 19
+POP R0
+RET
+`
+
+	bytecode := Assemble(code)
+	RunCPU(bytecode)
+	Disassemble(bytecode)
 }
