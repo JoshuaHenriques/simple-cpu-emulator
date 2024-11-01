@@ -31,9 +31,9 @@ var registerNames = map[string]int{
 
 func Assemble(code string) []int {
 	tokens := getTokens(code)
-	fmt.Printf("tokens: %+v\n", tokens)
+	fmt.Printf("Tokens: %+v\n", tokens)
 	bytes := getBytecode(tokens)
-	fmt.Printf("bytes: %+v\n", bytes)
+	fmt.Printf("\nBytecode: %+v\n", bytes)
 	return bytes
 }
 

@@ -160,7 +160,8 @@ func Disassemble(program []int) string {
 		}
 	}
 
-	fmt.Printf("disassembler:\n%s", src.String())
-
+	fmt.Printf("\nDisassembler:")
+	fmt.Printf("\n%-8s%-16s%-s\n", "PC", "Byte Instr", "ASM")
+	fmt.Printf("%s", src.String())
 	return src.String()
 }

@@ -38,6 +38,7 @@ RET
 `
 
 	bytecode := Assemble(code)
+	fmt.Printf("\nFibonacci for 10:\n")
 	RunCPU(bytecode)
 	Disassemble(bytecode)
 }
