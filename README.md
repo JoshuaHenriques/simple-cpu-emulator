@@ -1,6 +1,23 @@
 # Simple CPU Emulator
 
-Prints the fibonacci sequence up to n.
+This is a simple CPU emulator with 12 opcodes that prints the Fibonacci sequence up to n.
+
+### Opcodes
+
+| Instruction | Opcode | Syntax                     | Operation                     | Description                                                                 |
+|-------------|--------|----------------------------|-------------------------------|-----------------------------------------------------------------------------|
+| MOVR        | 10     | MOVR reg_dst, reg_src      | regdst = regsrc               | Loads the value from regsrc into regdst.                                   |
+| MOVV        | 11     | MOVV reg_dst, value        | regdst = value                | Loads the numeric value into register regdst.                              |
+| ADD         | 20     | ADD reg_dst, reg_src       | regdst += regsrc              | Adds the value from regsrc to the value of regdst and store the result in reg_dst. |
+| SUB         | 21     | SUB reg_dst, reg_src       | regdst -= regsrc              | Subtracts the value of regsrc from the value of regdst and store the result in reg_dst. |
+| PUSH        | 30     | PUSH reg_src                | stack.push(regsrc)            | Pushes the value of reg_src on the stack.                                  |
+| POP         | 31     | POP reg_dst                 | regdst = stack.pop()          | Pops the last value from stack and loads it into register reg_dst.         |
+| JP          | 40     | JP addr                     | PC = addr                     | Jumps the execution to address addr. Similar to a GOTO!                   |
+| JL          | 41     | JL reg_1, reg_2, addr      | if (reg1 < reg2) PC = addr   | Jump to the address addr only if the value from reg1 < reg2.              |
+| CALL        | 42     | CALL addr                   | stack.push(PC+1); PC = addr  | Pushes onto the stack the address of instruction that follows CALL and then jumps to address addr. |
+| RET         | 50     | RET                         | PC = stack.pop()              | Pops from the stack the last number, assumes is an address and jump to that address. |
+| PRINT       | 60     | PRINT reg                   | print(reg)                    | Print on the screen the value contained in the register reg.               |
+| HALT        | 255    | HALT                        | stop execution                | Stops our VM. The virtual CPU doesn't execute instructions once HALT is encountered. |
 
 ### Golang Code
 ```
